@@ -9,6 +9,30 @@
     signal handler for input??
     control memory usage throughout program  */
 
+    int menu();
+    unsigned long long coalescence(unsigned long long N, unsigned long long s);
+    void coal_func(long k);
+    void annihilation(unsigned long long N, unsigned long long s);
+    void ann_func(long k);
+    void survivor_steps(unsigned long long N, unsigned long long s);
+    void surv_func(long k);
+    void pair_steps(unsigned long long N, unsigned long long s);
+    void pair_func(long k);
+    void pair_steps2(unsigned long long N, unsigned long long s);
+    void pair_func2(long k);
+    void corr(unsigned long long N, unsigned long long s);
+    void corr_func(long k);
+    void pair_steps3(unsigned long long N, unsigned long long s);
+    void pair_exp(unsigned long long N, unsigned long long s, unsigned long long n, unsigned long long m);
+    void lyons_line(unsigned long long N, unsigned long long s);
+    void lyons_exp(long i, long j, unsigned long long *lyst);
+    void pair_time(unsigned long long N, unsigned long long s);
+    void taus(unsigned long long N, unsigned long long s);
+    void tau_exp(unsigned long long N, unsigned long long s);
+    unsigned long long* readFromFile(char* filename);
+    void writeToFile(char* filename);
+    unsigned long long mean(unsigned long long* array, unsigned long long s);
+
 int main(int argc, char const *argv[])
 {
     printf("Welcome!\n");
@@ -42,167 +66,171 @@ int menu(){
         return 1;
     }
     printf("\n");
+    char* Nstr, Sstr, Kstr, Mstr, nstr, Istr, Jstr;
+    unsigned long long N, s, m, n;
+    long k;
+
     switch(option){
         case 1:
             /* Get values for N and s */
-            char* Nstr = malloc(sizeof(Nstr) * 100);
-            char* Sstr = malloc(sizeof(Sstr) * 100);
+            Nstr = malloc(sizeof(Nstr) * 100);
+            Sstr = malloc(sizeof(Sstr) * 100);
             printf("N:");
             fgets(Nstr, 100, stdin);
             printf("s:");
             fgets(Sstr, 100, stdin);
-            unsigned long long N = atoi(Nstr);
-            unsigned long long s = atoi(Sstr);
+            N = (unsigned long long) atoi(Nstr);
+            s = (unsigned long long) atoi(Sstr);
             free(Nstr); free(Sstr);
             coalescence(N, s);
             free(N); free(s);
             break;
         case 2:
             /* Get value for k */
-            char* Kstr = malloc(sizeof(Kstr) * 100);
+            Kstr = malloc(sizeof(Kstr) * 100);
             printf("k:");
             fgets(Kstr, 100, stdin);
-            long k = atoi(Kstr);
+            k = atoi(Kstr);
             free(Kstr);
             coal_func(k);
             break;
         case 3:
             /* Get values for N and s */
-            char* Nstr = malloc(sizeof(Nstr) * 100);
-            char* Sstr = malloc(sizeof(Sstr) * 100);
+            Nstr = malloc(sizeof(Nstr) * 100);
+            Sstr = malloc(sizeof(Sstr) * 100);
             printf("N:");
             fgets(Nstr, 100, stdin);
             printf("s:");
             fgets(Sstr, 100, stdin);
-            unsigned long long N = atoi(Nstr);
-            unsigned long long s = atoi(Sstr);
+            N = atoi(Nstr);
+            s = atoi(Sstr);
             free(Nstr); free(Sstr);
             annihilation(N, s);
             free(N); free(s);
             break;
         case 4:
             /* Get value for k */
-            char* Kstr = malloc(sizeof(Kstr) * 100);
+            Kstr = malloc(sizeof(Kstr) * 100);
             printf("k:");
             fgets(Kstr, 100, stdin);
-            long k = atoi(Kstr);
+            k = atoi(Kstr);
             free(Kstr);
             ann_func(k);
             free(k);
             break;
         case 5:
             /* Get values for N and s */
-            char* Nstr = malloc(sizeof(Nstr) * 100);
-            char* Sstr = malloc(sizeof(Sstr) * 100);
+            Nstr = malloc(sizeof(Nstr) * 100);
+            Sstr = malloc(sizeof(Sstr) * 100);
             printf("N:");
             fgets(Nstr, 100, stdin);
             printf("s:");
             fgets(Sstr, 100, stdin);
-            unsigned long long N = atoi(Nstr);
-            unsigned long long s = atoi(Sstr);
+            N = atoi(Nstr);
+            s = atoi(Sstr);
             free(Nstr); free(Sstr);
             survivor_steps(N, s);
             free(N); free(s);
             break;
         case 6:
             /* Get value for k */
-            char* Kstr = malloc(sizeof(Kstr) * 100);
+            Kstr = malloc(sizeof(Kstr) * 100);
             printf("k:");
             fgets(Kstr, 100, stdin);
             long k = atoi(Kstr);
             free(Kstr);
-            surv_func(K);
+            surv_func(k);
             free(k);
             break;
         case 7:
             /* Get values for N and s */
-            char* Nstr = malloc(sizeof(Nstr) * 100);
-            char* Sstr = malloc(sizeof(Sstr) * 100);
+            Nstr = malloc(sizeof(Nstr) * 100);
+            Sstr = malloc(sizeof(Sstr) * 100);
             printf("N:");
             fgets(Nstr, 100, stdin);
             printf("s:");
             fgets(Sstr, 100, stdin);
-            unsigned long long N = atoi(Nstr);
-            unsigned long long s = atoi(Sstr);
+            N = atoi(Nstr);
+            s = atoi(Sstr);
             free(Nstr); free(Sstr);
             pair_steps(N, s);
             free(N); free(s);
             break;
         case 8:
             /* Get value for k */
-            char* Kstr = malloc(sizeof(Kstr) * 100);
+            Kstr = malloc(sizeof(Kstr) * 100);
             printf("k:");
             fgets(Kstr, 100, stdin);
-            long k = atoi(Kstr);
+            k = atoi(Kstr);
             free(Kstr);
             pair_func(k);
-            free(k)
+            free(k);
             break;
         case 9:
             /* Get values for N and s */
-            char* Nstr = malloc(sizeof(Nstr) * 100);
-            char* Sstr = malloc(sizeof(Sstr) * 100);
+            Nstr = malloc(sizeof(Nstr) * 100);
+            Sstr = malloc(sizeof(Sstr) * 100);
             printf("N:");
             fgets(Nstr, 100, stdin);
             printf("s:");
             fgets(Sstr, 100, stdin);
-            unsigned long long N = atoi(Nstr);
-            unsigned long long s = atoi(Sstr);
+            N = atoi(Nstr);
+            s = atoi(Sstr);
             free(Nstr); free(Sstr);
             pair_steps2(N, s);
             free(N); free(s);
             break;
         case 10:
             /* Get value for k */
-            char* Kstr = malloc(sizeof(Kstr) * 100);
+            Kstr = malloc(sizeof(Kstr) * 100);
             printf("k:");
             fgets(Kstr, 100, stdin);
-            long k = atoi(Kstr);
+            k = atoi(Kstr);
             free(Kstr);
             pair_func2(k);
             free(k);
             break;
         case 11:
             /* Get values for N and s */
-            char* Nstr = malloc(sizeof(Nstr) * 100);
-            char* Sstr = malloc(sizeof(Sstr) * 100);
+            Nstr = malloc(sizeof(Nstr) * 100);
+            Sstr = malloc(sizeof(Sstr) * 100);
             printf("N:");
             fgets(Nstr, 100, stdin);
             printf("s:");
             fgets(Sstr, 100, stdin);
-            unsigned long long N = atoi(Nstr);
-            unsigned long long s = atoi(Sstr);
+            N = atoi(Nstr);
+            s = atoi(Sstr);
             corr(N, s);
             free(N); free(s); free(Nstr); free(Sstr);
             break;
         case 12:
             /* Get value for k */
-            char* Kstr = malloc(sizeof(Kstr) * 100);
+            Kstr = malloc(sizeof(Kstr) * 100);
             printf("k:");
             fgets(Kstr, 100, stdin);
-            long k = atoi(Kstr);
+            k = atoi(Kstr);
             free(Kstr);
             corr_func(k);
             break;
         case 13:
             /* Get values for N and s */
-            char* Nstr = malloc(sizeof(Nstr) * 100);
-            char* Sstr = malloc(sizeof(Sstr) * 100);
+            Nstr = malloc(sizeof(Nstr) * 100);
+            Sstr = malloc(sizeof(Sstr) * 100);
             printf("N:");
             fgets(Nstr, 100, stdin);
             printf("s:");
             fgets(Sstr, 100, stdin);
-            unsigned long long N = atoi(Nstr);
-            unsigned long long s = atoi(Sstr);
+            N = atoi(Nstr);
+            s = atoi(Sstr);
             pair_steps3(N, s);
             free(N); free(s); free(Nstr); free(Sstr);
             break;
         case 14:
             /* Get values for N, s, m, and n */
-            char* Nstr = malloc(sizeof(Nstr) * 100);
-            char* Sstr = malloc(sizeof(Sstr) * 100);
-            char* Mstr = malloc(sizeof(Mstr) * 100);
-            char* nstr = malloc(sizeof(nstr) * 100);
+            Nstr = malloc(sizeof(Nstr) * 100);
+            Sstr = malloc(sizeof(Sstr) * 100);
+            Mstr = malloc(sizeof(Mstr) * 100);
+            nstr = malloc(sizeof(nstr) * 100);
             printf("N:");
             fgets(Nstr, 100, stdin);
             printf("s:");
@@ -211,32 +239,32 @@ int menu(){
             fgets(Mstr, 100, stdin);
             printf("n:");
             fgets(nstr, 100, stdin);
-            unsigned long long N = atoi(Nstr);
-            unsigned long long s = atoi(Sstr);
-            unsigned long long m = atoi(Mstr);
-            unsigned long long n = atoi(nstr);
+            N = atoi(Nstr);
+            s = atoi(Sstr);
+            m = atoi(Mstr);
+            n = atoi(nstr);
             free(Nstr); free(Sstr); free(Mstr); free(nstr);
             pair_exp(N, s, m, n);
             free(N); free(s); free(m); free(n);
             break;
         case 15:
             /* Get values for N and s */
-            char* Nstr = malloc(sizeof(Nstr) * 100);
-            char* Sstr = malloc(sizeof(Sstr) * 100);
+            Nstr = malloc(sizeof(Nstr) * 100);
+            Sstr = malloc(sizeof(Sstr) * 100);
             printf("N:");
             fgets(Nstr, 100, stdin);
             printf("s:");
             fgets(Sstr, 100, stdin);
-            unsigned long long N = atoi(Nstr);
-            unsigned long long s = atoi(Sstr);
+            N = atoi(Nstr);
+            s = atoi(Sstr);
             free(Nstr); free(Sstr);
             lyons_line(N, s);
             free(N); free(s);
             break;
         case 16:
             /* Get values for i, j, and filename to lyst */
-            char* Istr = malloc(sizeof(Istr) * 100);
-            char* Jstr = malloc(sizeof(Jstr) * 100);
+            Istr = malloc(sizeof(Istr) * 100);
+            Jstr = malloc(sizeof(Jstr) * 100);
             char* filename = malloc(sizeof(filename) * 150);
             printf("i:");
             fgets(Istr, 100, stdin);
@@ -246,49 +274,49 @@ int menu(){
             fgets(filename, 150, stdin);
             long i = atoi(Istr);
             long j = atoi(Jstr);
-            unsigned long long *lyst = readFromFile(filename);
+            // unsigned long long *lyst = readFromFile(filename);
             free(Istr); free(Jstr); free(filename);
-            lyons_exp(i, j, lyst);
-            free(i); free(j); free(lyst);
+            // lyons_exp(i, j, lyst);
+            // free(i); free(j); free(lyst);
             break;
         case 17:
             /* Get values for N and s */
-            char* Nstr = malloc(sizeof(Nstr) * 100);
-            char* Sstr = malloc(sizeof(Sstr) * 100);
+            Nstr = malloc(sizeof(Nstr) * 100);
+            Sstr = malloc(sizeof(Sstr) * 100);
             printf("N:");
             fgets(Nstr, 100, stdin);
             printf("s:");
             fgets(Sstr, 100, stdin);
-            unsigned long long N = atoi(Nstr);
-            unsigned long long s = atoi(Sstr);
+            N = atoi(Nstr);
+            s = atoi(Sstr);
             free(Nstr); free(Sstr);
             pair_time(N, s);
             free(N); free(s);
             break;
         case 18:
             /* Get values for N and s */
-            char* Nstr = malloc(sizeof(Nstr) * 100);
-            char* Sstr = malloc(sizeof(Sstr) * 100);
+            Nstr = malloc(sizeof(Nstr) * 100);
+            Sstr = malloc(sizeof(Sstr) * 100);
             printf("N:");
             fgets(Nstr, 100, stdin);
             printf("s:");
             fgets(Sstr, 100, stdin);
-            unsigned long long N = atoi(Nstr);
-            unsigned long long s = atoi(Sstr);
+            N = atoi(Nstr);
+            s = atoi(Sstr);
             free(Nstr); free(Sstr);
             taus(N, s);
             free(N); free(s);
             break;
         case 19:
             /* Get values for N and s */
-            char* Nstr = malloc(sizeof(Nstr) * 100);
-            char* Sstr = malloc(sizeof(Sstr) * 100);
+            Nstr = malloc(sizeof(Nstr) * 100);
+            Sstr = malloc(sizeof(Sstr) * 100);
             printf("N:");
             fgets(Nstr, 100, stdin);
             printf("s:");
             fgets(Sstr, 100, stdin);
-            unsigned long long N = atoi(Nstr);
-            unsigned long long s = atoi(Sstr);
+            N = atoi(Nstr);
+            s = atoi(Sstr);
             free(Nstr); free(Sstr);
             tau_exp(N, s);
             free(N); free(s);
@@ -298,9 +326,9 @@ int menu(){
     return 0;
 }
 
-void coalescence(unsigned long long N, unsigned long long s){
+unsigned long long coalescence(unsigned long long N, unsigned long long s){
     unsigned long long* times = malloc((s + 1) * sizeof(times));
-
+    
     if(N == 1){
         printf("Average time: 0");
         return;
@@ -331,10 +359,10 @@ void coalescence(unsigned long long N, unsigned long long s){
             // shift/coalesce particles
             if(vertex == (N - 1)){
                 RW[0] = RW[vertex];
-                RW[vertex] = 0
+                RW[vertex] = 0;
             } else {
                 RW[vertex + 1] = RW[vertex];
-                RW[vertex] = 0
+                RW[vertex] = 0;
             }
 
             // case where only one particle remains
@@ -354,11 +382,24 @@ void coalescence(unsigned long long N, unsigned long long s){
             }
         }
     }
-    unsigned long long averageTime = mean(times);
+    unsigned long long averageTime = mean(times, s);
     printf("Average time of %llu particles: %llu", N, averageTime);
+
+    return averageTime;
 }
 
 void coal_func(long k){
+    long* nvals = malloc((k+1) * sizeof(nvals));
+    for(long i = 0; i < k; i++){
+        nvals[i] = i + 1;
+    }
+    unsigned long long* t_avg = malloc((k+1) * sizeof(t_avg));
+
+    for(long i = 0; i < k; i++){
+        printf("i: %d", i + 1);
+        t_avg[i] <- coalescence((unsigned long long) i + 1, 100000);
+        printf("average time for %d particles: %llu", i + 1, t_avg[i]);
+    }
 }
 
 void annihilation(unsigned long long N, unsigned long long s){
@@ -435,7 +476,7 @@ void writeToFile(char* filename){
     printf("Saving results to Results.csv...\n");
 }
 
-unsigned long long mean(unsigned long long array*, s){
+unsigned long long mean(unsigned long long* array, unsigned long long s){
     unsigned long long avg = 0;
     for(unsigned long long i = 0; i < s; i++){
         avg += array[i];
