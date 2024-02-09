@@ -1,2 +1,2 @@
-# MCREU-CRW
-Testing commit/push
+# MCREU-Coalescing Random Walks
+Within this repository you will find three different folders for the simulations written in Python (Bram Silbert) and R (Lillian Makhoul). There is also a third folder where the simulations were started to be translated to C, as C is more high performing that Python or R are, and would run the simulations much more quickly. This code was never finished, however the Python and R codes run without error.
